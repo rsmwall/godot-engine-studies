@@ -11,6 +11,20 @@ extends Node2D
 var array = [100, 200, 300, 400, 500, 600, 700]
 var tipos = ['fps', 'rpg']
 var numeros = [100, 200, 300, 400]
+var players = {}
+
+# dicionario
+
+var jogadores = {
+    "p1": "Rafael",
+    "p2": "Ana",
+    "p3": "Kyle",
+    "p4": "Felipe"
+}
+var dic = {
+    "a": "Game",
+    "b": "Player"
+}
 
 func _ready():
 	
@@ -36,3 +50,18 @@ func _ready():
 	numeros.erase(300)
 	print('Depois -> ', numeros)
 	print('Taamnho do array -> ', numeros.size())
+
+	# imprimir dicionarios
+
+	print('Primeiro jogador: ', jogadores.p1)
+	print(dic.b)
+
+    # adicionando valores ao dicionario
+	players.p1 = "Felipe"
+	players.p2 = "Antonio"
+	players.p3 = "Kleber"
+
+    # remover um objeto
+	players.erase("p3")
+
+	print(players)
