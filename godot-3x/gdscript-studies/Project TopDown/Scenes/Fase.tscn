@@ -1,0 +1,206 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Assets/Player/baixo01.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Player/baixo03.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/cima03.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/cima04.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/esquerda01.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/esquerda02.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player/esquerda03.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Player/cima01.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Player/esquerda04.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Player/baixo04.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Player/direita04.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Player/baixo02.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Player/direita02.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Player/cima02.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Player/direita03.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Player/direita01.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Arbusto.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Arvore.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scenes/ArvoreSeca.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Tronco.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Fonts/coolvetica rg.otf" type="DynamicFontData" id=22]
+[ext_resource path="res://Assets/sword.png" type="Texture" id=23]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "baixo",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "cima",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "direita",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "esquerda",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "parado",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 37, 15 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 816.667, 333.333 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 22 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 60.075
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 59.0
+
+[sub_resource type="Animation" id=6]
+resource_name = "Fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("../Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ null ],
+"method": "mudar"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="Fase" type="Node"]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 513, 299 )
+z_index = 10
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Player"]
+scale = Vector2( 0.2, 0.2 )
+frames = SubResource( 2 )
+animation = "parado"
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+position = Vector2( -1, 33 )
+shape = SubResource( 1 )
+
+[node name="CamPlayer" type="Camera2D" parent="Player"]
+current = true
+
+[node name="Espada" type="Sprite" parent="Player"]
+position = Vector2( -0.0596733, 0.0360718 )
+rotation = 0.785398
+scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 23 )
+offset = Vector2( -1696.5, -1699.31 )
+
+[node name="Area" type="Area2D" parent="Player/Espada"]
+position = Vector2( -1696.5, -1699.31 )
+
+[node name="Collision" type="CollisionShape2D" parent="Player/Espada/Area"]
+position = Vector2( -11.7852, -11.7847 )
+rotation = 0.785398
+scale = Vector2( 1, 1 )
+shape = SubResource( 8 )
+
+[node name="Arbusto" parent="." instance=ExtResource( 18 )]
+position = Vector2( 433, 48 )
+
+[node name="Arbusto2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 845, 165 )
+
+[node name="Arbusto3" parent="." instance=ExtResource( 18 )]
+position = Vector2( 474, 454 )
+
+[node name="Arvore" parent="." instance=ExtResource( 19 )]
+position = Vector2( 26, 50 )
+
+[node name="Arvore2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1087, 421 )
+
+[node name="ArvoreSeca" parent="." instance=ExtResource( 20 )]
+position = Vector2( -241, 531 )
+scale = Vector2( 2, 2 )
+
+[node name="Tronco" parent="." instance=ExtResource( 21 )]
+position = Vector2( 708, 694 )
+
+[node name="Tela" type="CanvasLayer" parent="."]
+
+[node name="Player" type="Label" parent="Tela"]
+margin_left = 16.0
+margin_top = 9.0
+margin_right = 79.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 0.843137, 0.905882, 0.843137, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Rafael"
+valign = 1
+
+[node name="Inicio" type="Area2D" parent="."]
+position = Vector2( 1074, 683 )
+
+[node name="Collision" type="CollisionShape2D" parent="Inicio"]
+shape = SubResource( 4 )
+
+[node name="Fim" type="Area2D" parent="."]
+position = Vector2( -239, -311 )
+
+[node name="Collision" type="CollisionShape2D" parent="Fim"]
+shape = SubResource( 5 )
+
+[node name="Fade" type="CanvasLayer" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="Fade"]
+anims/Fade = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="Fade"]
+visible = false
+margin_right = 1034.0
+margin_bottom = 603.0
+color = Color( 0, 0, 0, 0 )
