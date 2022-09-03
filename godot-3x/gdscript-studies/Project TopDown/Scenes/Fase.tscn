@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Player/baixo01.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scenes/Tronco.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Fonts/coolvetica rg.otf" type="DynamicFontData" id=22]
 [ext_resource path="res://Assets/sword.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/Inimigo.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -132,19 +133,21 @@ shape = SubResource( 1 )
 current = true
 
 [node name="Espada" type="Sprite" parent="Player"]
+visible = false
 position = Vector2( -0.0596733, 0.0360718 )
 rotation = 0.785398
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 23 )
 offset = Vector2( -1696.5, -1699.31 )
 
-[node name="Area" type="Area2D" parent="Player/Espada"]
+[node name="AreaEsp" type="Area2D" parent="Player/Espada"]
 position = Vector2( -1696.5, -1699.31 )
+monitoring = false
+monitorable = false
 
-[node name="Collision" type="CollisionShape2D" parent="Player/Espada/Area"]
+[node name="Collision" type="CollisionShape2D" parent="Player/Espada/AreaEsp"]
 position = Vector2( -11.7852, -11.7847 )
 rotation = 0.785398
-scale = Vector2( 1, 1 )
 shape = SubResource( 8 )
 
 [node name="Arbusto" parent="." instance=ExtResource( 18 )]
@@ -200,7 +203,12 @@ anims/Fade = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="Fade"]
-visible = false
 margin_right = 1034.0
 margin_bottom = 603.0
 color = Color( 0, 0, 0, 0 )
+
+[node name="Inimigo" parent="." instance=ExtResource( 24 )]
+position = Vector2( 231, 309 )
+
+[node name="Inimigo2" parent="." instance=ExtResource( 24 )]
+position = Vector2( 774, 310 )

@@ -4,7 +4,16 @@ var velocidade = 12000
 
 func _ready():
 	set_process(true)
+	set_process_input(true)
 	get_parent().get_node("Inicio").connect("body_entered", self, "mudar_posicao")
+
+func _input(event):
+	if Input.is_action_pressed("ataque"):
+		get_node("Espada").show()
+		get_node("Espada/AreaEsp").set_monitorable(true)
+	else:
+		get_node("Espada").hide()
+		get_node("Espada/AreaEsp").set_monitorable(false)
 
 func _process(delta):
 	var direcao = Vector2(0, 0)
@@ -67,5 +76,7 @@ func mudar_posicao(body):
 func mudar():
 	self.set_position(get_parent().get_node("Fim").get_position())
 
+
+# funcao para direcao da espada
 func espada(rot):
 	get_node("Espada").set_rotation_degrees(rot)
