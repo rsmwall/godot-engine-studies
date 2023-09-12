@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/rock1.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Asteroide.gd" type="Script" id=2]
+
+[node name="Asteroide" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Rock1" type="Sprite" parent="."]
+position = Vector2( -58, -7 )
+texture = ExtResource( 1 )
